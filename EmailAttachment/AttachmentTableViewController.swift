@@ -44,6 +44,11 @@ class AttachmentTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFile = filenames[indexPath.row]
+        showEmailWith(attachment: selectedFile)
+    }
 
 }
 
