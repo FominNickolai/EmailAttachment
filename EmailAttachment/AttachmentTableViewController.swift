@@ -47,7 +47,7 @@ class AttachmentTableViewController: UITableViewController {
 
 }
 
-//MARK: - MFMailComposeViewControllerDelegate
+//MARK: - MFMailComposeViewController
 extension AttachmentTableViewController: MFMailComposeViewControllerDelegate {
     enum MIMEType: String {
         case jpg = "image/jpeg/"
@@ -99,6 +99,24 @@ extension AttachmentTableViewController: MFMailComposeViewControllerDelegate {
             //Present mail view controller in screen
             present(mailComposer, animated: true, completion: nil)
         }
+    }
+    
+    //MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        switch result {
+        case MFMailComposeResult.cancelled:
+            print("Mail cancelled")
+        case MFMailComposeResult.saved:
+            print("Mail saved")
+        case MFMailComposeResult.sent:
+            print("Mail sent")
+        case MFMailComposeResult.failed:
+            print("Failed to senf: \(error ?? "" as! Error)")
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
     }
 }
 
